@@ -15,38 +15,52 @@
 package cmd
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
+	. "github.com/scottdware/go-panos"
+	//. "github.com/IrekRomaniuk/go-panos"
+	"log"
+	"github.com/spf13/viper"
+	"fmt"
 )
 
 // loadCmd represents the load command
+
+var (
+	File string
+	Shared bool
+)
+
 var loadCmd = &cobra.Command{
 	Use:   "load",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Loads address object from csv file",
+	Long: `Command takes a .csv file with the following format: name,type,address,description,address-group
+'name' is what you want the address object to be called.
+'type' is one of: ip, range, or fqdn.
+'address' is the address of the object.
+'description' is optional, just leave the field blank if you do not want one.
+'address-group' will assign the object to the given address-group if you wish (leave blank if you do not want to add it to a group).
+If creating shared address objects on a Panorama device, then specify "true" for the shared parameter, and omit the device-group.
+If not creating a shared object, then just specify "false."
+	`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// TODO: Work your own magic here
-		fmt.Println("load called")
+		host := viper.GetString("device") // case-insensitive Setting & Getting
+		login := viper.GetString("login")
+		pan1session, err := NewSession(host, login, Password)
+		if err != nil {
+			log.Fatal(err)
+		}
+		//csv file format: name,type,address,description,address-group
+		fmt.Println(File, Shared, Devicegroup, host, login, Password)
+		err = pan1session.CreateAddressFromCsv(File, Shared, Devicegroup)
+		if err != nil {
+			log.Fatal(err)
+		}
 	},
 }
 
 func init() {
 	RootCmd.AddCommand(loadCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// loadCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// loadCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-
+	loadCmd.Flags().StringVarP(&File, "file","f", "","Csv file to load from (full path)")
+	//i.e."C:\Users\irekromaniuk\Vagrant\trusty64\src\github.com\IrekRomaniuk\pan-cli\cmd\address.csv"
+	loadCmd.Flags().BoolVarP(&Shared, "shared","s", false,"True for Panorama")
 }

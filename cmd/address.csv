@@ -1,0 +1,10 @@
+host_1.1.1.1,ip,1.1.1.1,,mygroup
+host_1.1.1.2,ip,1.1.1.2,,mygroup
+host_1.1.1.6,ip,1.1.1.6,,mygroup
+host_1.1.1.4,ip,1.1.1.4/32,,mygroup
+host_1.1.1.5,ip,1.1.1.5,,
+host_1.1.1.7,ip,1.1.1.7,,
+host_1.1.1.8,ip,1.1.1.8,,
+host_1.1.1.9,ip,1.1.1.9,,mygroup
+host_1.1.1.10,ip,1.1.1.10,,mygroup
+host_1.1.1.11,ip,1.1.1.11,,mygroup

@@ -22,18 +22,19 @@ import (
 	"github.com/spf13/viper"
 )
 
-var cfgFile string
+var (
+	cfgFile string
+	Password string
+	Devicegroup string
+)
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "pan-cli",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
+	Short: "Paloalto firewall (PANOS) command line",
+	Long: `Package using github.com/scottdware/go-panos by Scott Ware to interact with Palo Alto and Panorama devices using the XML API.
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+`,
 // Uncomment the following line if your bare application
 // has an action associated with it:
 //	Run: func(cmd *cobra.Command, args []string) { },
@@ -55,20 +56,28 @@ func init() {
 	// Cobra supports Persistent Flags, which, if defined here,
 	// will be global for your application.
 
-	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.pan-cli.yaml)")
+	RootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "Yaml config file ")
+	//i.e. --config "C:\Users\irekromaniuk\Vagrant\trusty64\src\github.com\IrekRomaniuk\pan-cli\pan-cli.yaml"
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	RootCmd.PersistentFlags().Bool("viper", true, "Use Viper for configuration")
+	RootCmd.PersistentFlags().StringP("device", "d", "", "Device to connect")
+	loadCmd.Flags().StringVarP(&Devicegroup, "devicegroup","g", "","Panorama devicegroup")
+	RootCmd.PersistentFlags().StringP("login", "u", "admin", "Login name")
+	RootCmd.PersistentFlags().StringVarP(&Password, "password","p", "","Password")
+	viper.BindPFlag("device", RootCmd.PersistentFlags().Lookup("device"))
+	viper.BindPFlag("login", RootCmd.PersistentFlags().Lookup("login"))
 }
 
 // initConfig reads in config file and ENV variables if set.
 func initConfig() {
+	//viper.SetConfigType("yaml")
 	if cfgFile != "" { // enable ability to specify config file via flag
 		viper.SetConfigFile(cfgFile)
 	}
-
-	viper.SetConfigName(".pan-cli") // name of config file (without extension)
-	viper.AddConfigPath("$HOME")  // adding home directory as first search path
+	//viper.SetConfigName(".pan-cli") // name of config file (without extension)
+	//viper.AddConfigPath("$HOME")  // adding home directory as first search path
 	viper.AutomaticEnv()          // read in environment variables that match
 
 	// If a config file is found, read it in.
