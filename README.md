@@ -1,6 +1,6 @@
-### PaloAlto firewall (PAN-OS) cli utils based on [go-panos](github.com/scottdware/go-panos)
-#### More at [my blog](http://medium.com/@IrekRomaniuk)
-[my blog](http://medium.com/@IrekRomaniuk)
+### PaloAlto firewall (PAN-OS) cli utils based on go-panos @ github.com/scottdware/go-panos)
+#### More at my blog at http://medium.com/@IrekRomaniuk)
+
 ```
 pan-cli load --config pan-cli.yaml -p password -f file.csv -> load address objects from file
 
