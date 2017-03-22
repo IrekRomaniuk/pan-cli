@@ -32,8 +32,8 @@ var (
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "pan-cli",
-	Short: "Paloalto firewall (PANOS) command line",
-	Long: `Package using github.com/scottdware/go-panos by Scott Ware to interact with Palo Alto and Panorama devices using the XML API.
+	Short: "Paloalto firewall (PANOS) command line. ",
+	Long: `Copyright 2017 @IrekRomaniuk. Package using github.com/scottdware/go-panos by Scott Ware to interact with Palo Alto and Panorama devices using the XML API.
 
 `,
 // Uncomment the following line if your bare application
@@ -61,11 +61,11 @@ func init() {
 	//i.e. --config "C:\Users\irekromaniuk\Vagrant\trusty64\src\github.com\IrekRomaniuk\pan-cli\pan-cli.yaml"
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
-	RootCmd.PersistentFlags().Bool("viper", true, "Use Viper for configuration")
+	//RootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	//RootCmd.PersistentFlags().Bool("viper", true, "Use Viper for configuration")
 	RootCmd.PersistentFlags().StringP("device", "d", "", "Device to connect")
 	RootCmd.PersistentFlags().StringVarP(&Devicegroup, "devicegroup","g", "","Panorama devicegroup")
-	RootCmd.PersistentFlags().BoolVarP(&Shared, "shared","s", false,"True for Panorama")
+	RootCmd.PersistentFlags().BoolVarP(&Shared, "shared","s", false,"True for shared objects")
 	RootCmd.PersistentFlags().StringP("login", "u", "admin", "Login name")
 	RootCmd.PersistentFlags().StringVarP(&Password, "password","p", "","Password")
 	viper.BindPFlag("device", RootCmd.PersistentFlags().Lookup("device"))

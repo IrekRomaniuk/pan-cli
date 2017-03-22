@@ -20,7 +20,6 @@ import (
 	//. "github.com/IrekRomaniuk/go-panos"
 	"log"
 	"github.com/spf13/viper"
-	"fmt"
 )
 
 // loadCmd represents the load command
@@ -49,7 +48,7 @@ If not creating a shared object, then just specify "false."
 			log.Fatal(err)
 		}
 		//csv file format: name,type,address,description,address-group
-		fmt.Println(file, Shared, Devicegroup, host, login, Password)
+		//fmt.Println(file, Shared, Devicegroup, host, login, Password)
 		err = pan1session.CreateAddressFromCsv(file, Shared, Devicegroup)
 		if err != nil {
 			log.Fatal(err)
