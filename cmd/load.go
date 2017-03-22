@@ -26,8 +26,7 @@ import (
 // loadCmd represents the load command
 
 var (
-	File string
-	Shared bool
+	file string
 )
 
 var loadCmd = &cobra.Command{
@@ -50,8 +49,8 @@ If not creating a shared object, then just specify "false."
 			log.Fatal(err)
 		}
 		//csv file format: name,type,address,description,address-group
-		fmt.Println(File, Shared, Devicegroup, host, login, Password)
-		err = pan1session.CreateAddressFromCsv(File, Shared, Devicegroup)
+		fmt.Println(file, Shared, Devicegroup, host, login, Password)
+		err = pan1session.CreateAddressFromCsv(file, Shared, Devicegroup)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -60,7 +59,6 @@ If not creating a shared object, then just specify "false."
 
 func init() {
 	RootCmd.AddCommand(loadCmd)
-	loadCmd.Flags().StringVarP(&File, "file","f", "","Csv file to load from (full path)")
+	loadCmd.Flags().StringVarP(&file, "file","f", "","Csv file to load from (full path)")
 	//i.e."C:\Users\irekromaniuk\Vagrant\trusty64\src\github.com\IrekRomaniuk\pan-cli\cmd\address.csv"
-	loadCmd.Flags().BoolVarP(&Shared, "shared","s", false,"True for Panorama")
 }

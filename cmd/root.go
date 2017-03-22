@@ -26,6 +26,7 @@ var (
 	cfgFile string
 	Password string
 	Devicegroup string
+	Shared bool
 )
 
 // RootCmd represents the base command when called without any subcommands
@@ -64,6 +65,7 @@ func init() {
 	RootCmd.PersistentFlags().Bool("viper", true, "Use Viper for configuration")
 	RootCmd.PersistentFlags().StringP("device", "d", "", "Device to connect")
 	loadCmd.Flags().StringVarP(&Devicegroup, "devicegroup","g", "","Panorama devicegroup")
+	loadCmd.Flags().BoolVarP(&Shared, "shared","s", false,"True for Panorama")
 	RootCmd.PersistentFlags().StringP("login", "u", "admin", "Login name")
 	RootCmd.PersistentFlags().StringVarP(&Password, "password","p", "","Password")
 	viper.BindPFlag("device", RootCmd.PersistentFlags().Lookup("device"))
