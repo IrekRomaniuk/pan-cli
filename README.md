@@ -1,4 +1,4 @@
-### PaloAlto firewall (PAN-OS) cli utils based on go-panos @ github.com/scottdware/go-panos)
+### PaloAlto firewall (PAN-OS) cli utils based on go-panos @ http://github.com/scottdware/go-panos)
 #### More at my blog at http://medium.com/@IrekRomaniuk)
 
 ```
