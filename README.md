@@ -5,6 +5,9 @@
 pan-cli load --config pan-cli.yaml -p password -f file.csv -> load address objects from file
 
 pan-cli create -u admin -p password -o "test_address" -v "1.2.3.4/32"
+
+pan-cli commit -d "192.168.3.101" -p 'password'             // Firewall
+pan-cli commit -d "192.168.3.100" -p 'password' -g 'DC2'    // Panorama device group 'DC2'
 ```
 
 #### config file (flags take precedence)
