@@ -48,7 +48,7 @@ If not creating a shared object, then just specify "false."`,
 		}
 		//fmt.Println(Shared, Devicegroup, host, login, Password)
 		//fmt.Printf("%+v\n", pan1session)
-		err = pan1session.CreateAddress(object,"ip",value,"", Shared, Devicegroup)
+		err = pan1session.CreateAddress(object,"ip",value,"", Devicegroup)  //Shared depreciated ??
 		if err != nil {
 			log.Fatal(err)
 		}

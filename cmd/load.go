@@ -49,7 +49,7 @@ If not creating a shared object, then just specify "false."
 		}
 		//csv file format: name,type,address,description,address-group
 		//fmt.Println(file, Shared, Devicegroup, host, login, Password)
-		err = pan1session.CreateAddressFromCsv(file, Shared, Devicegroup)
+		err = pan1session.CreateAddressFromCsv(file, Devicegroup) //Shared depreciated ??
 		if err != nil {
 			log.Fatal(err)
 		}
