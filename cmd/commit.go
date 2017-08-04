@@ -15,7 +15,7 @@
 package cmd
 
 import (
-	"fmt"
+	//"fmt"
 	"github.com/spf13/viper"
 	"github.com/spf13/cobra"
 	. "github.com/scottdware/go-panos"
@@ -32,7 +32,7 @@ or fiewall if 'devicegroup.' is empty
 	Run: func(cmd *cobra.Command, args []string) {
 		host := viper.GetString("device") // case-insensitive Setting & Getting
 		login := viper.GetString("login")
-		fmt.Println(Devicegroup, host, login, Password)
+		//fmt.Println(Devicegroup, host, login, Password)
 		pan1session, err := NewSession(host, login, Password)
 		if err != nil {
 			log.Fatal(err)
