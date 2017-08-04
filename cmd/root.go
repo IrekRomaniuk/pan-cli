@@ -65,7 +65,7 @@ func init() {
 	//RootCmd.PersistentFlags().Bool("viper", true, "Use Viper for configuration")
 	RootCmd.PersistentFlags().StringP("device", "d", "", "Device to connect")
 	RootCmd.PersistentFlags().StringVarP(&Devicegroup, "devicegroup","g", "","Panorama devicegroup")
-	//RootCmd.PersistentFlags().BoolVarP(&Shared, "shared","s", false,"True for shared objects")
+	RootCmd.PersistentFlags().BoolVarP(&Shared, "shared","s", false,"True for shared objects")
 	RootCmd.PersistentFlags().StringP("login", "u", "admin", "Login name")
 	RootCmd.PersistentFlags().StringVarP(&Password, "password","p", "","Password")
 	viper.BindPFlag("device", RootCmd.PersistentFlags().Lookup("device"))
